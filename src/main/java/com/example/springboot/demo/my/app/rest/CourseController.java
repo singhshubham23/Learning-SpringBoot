@@ -9,19 +9,23 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class CourseController {
     private Instructor myInstructor;
+    private Instructor anotherInstructor;
 
-//    @Autowired
-//    public void setInstructor(Instructor instructor){
-//        myInstructor = instructor;
-//    }
 
     @Autowired
-    public CourseController(@Qualifier("pythonInstructor") Instructor instructor){
+    public CourseController(@Qualifier("javaInstructor") Instructor instructor,
+                            @Qualifier("javaInstructor") Instructor theAnotherInstructor){
         myInstructor = instructor;
+        anotherInstructor = theAnotherInstructor;
     }
 
     @GetMapping("/programmingexercise")
     public String getProgrammingExercise(){
         return myInstructor.getProgrammingExercise();
+    }
+
+    @GetMapping("/check")
+    public String check(){
+        return "Comparing beans: "+(myInstructor == anotherInstructor);
     }
 }
