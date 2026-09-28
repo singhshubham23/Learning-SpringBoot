@@ -22,9 +22,41 @@ public class CrudappApplication {
 	public CommandLineRunner clr(EmployeeDAOInterface employeeDAOinterface) {
 		return runner -> {
 //			readEmployee(employeeDAOinterface);
-			employeesQuery(employeeDAOinterface);
+//			employeesQuery(employeeDAOinterface);
+//			employeesQueryByLastName(employeeDAOinterface);
+//			updateEmployee(employeeDAOinterface);
+			deleteEmployee(employeeDAOinterface);
 		};
 	}
+
+	public void deleteEmployee(EmployeeDAOInterface employeeDAOinterface) {
+		int id = 2;
+		System.out.println("Delete employee " +id);
+		employeeDAOinterface.delete(id);
+	}
+
+
+
+	private void updateEmployee(EmployeeDAOInterface employeeDAOinterface) {
+		int id = 1;
+		System.out.println("Retrievingid "+ id);
+
+		Employee employee = employeeDAOinterface.findById(id);
+
+		System.out.println("updating used data of "+id);
+		employee.setFirstName("Maya ");
+		employeeDAOinterface.update(employee);
+
+		System.out.println("updating used data of "+ employee);
+	}
+
+	private void employeesQueryByLastName(EmployeeDAOInterface employeeDAOinterface) {
+		List<Employee> employees = employeeDAOinterface.findBylastName("Dutta");
+		for (Employee employee : employees) {
+			System.out.println(employee);
+		}
+	}
+
 
 	public void employeesQuery(EmployeeDAOInterface employeeDAOinterface) {
 		List<Employee> employees = employeeDAOinterface.findAll();

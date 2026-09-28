@@ -3,7 +3,7 @@ package com.example.crudapp.DAO;
 import com.example.crudapp.entity.Employee;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.TypedQuery;
-import jakarta.transaction.Transactional;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -32,5 +32,25 @@ public class EmployeeDAO implements EmployeeDAOInterface {
     public List<Employee> findAll() {
         TypedQuery<Employee> query = entityManager.createQuery("from Employee order by lastName asc", Employee.class);
         return query.getResultList();
+    }
+
+    @Override
+    public List<Employee> findBylastName(String lastName) {
+        TypedQuery<Employee> query = entityManager.createQuery("from Employee where lastName=:data", Employee.class);
+        query.setParameter("data", lastName);
+        return query.getResultList();
+    }
+
+    @Override
+    @Transactional
+    public void update(Employee employee) {
+        entityManager.merge(employee);
+    }
+
+    @Override
+    @Transactional
+    public void delete(Integer id) {
+        Employee employee = entityManager.find(Employee.class, id);
+        entityManager.remove(employee);
     }
 }
