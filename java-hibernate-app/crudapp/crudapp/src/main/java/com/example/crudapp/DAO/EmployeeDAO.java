@@ -53,4 +53,11 @@ public class EmployeeDAO implements EmployeeDAOInterface {
         Employee employee = entityManager.find(Employee.class, id);
         entityManager.remove(employee);
     }
+
+    @Override
+    @Transactional
+    public int deleteAll() {
+        int rowsDeleted = entityManager.createQuery("delete from Employee").executeUpdate();
+        return rowsDeleted;
+    }
 }

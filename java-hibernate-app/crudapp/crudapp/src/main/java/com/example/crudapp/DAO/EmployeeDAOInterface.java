@@ -11,4 +11,5 @@ public interface EmployeeDAOInterface {
     List<Employee> findBylastName(String lastName);
     void update(Employee employee);
     void delete(Integer id);
+    int deleteAll();
 }

@@ -21,12 +21,20 @@ public class CrudappApplication {
 	@Bean
 	public CommandLineRunner clr(EmployeeDAOInterface employeeDAOinterface) {
 		return runner -> {
-//			readEmployee(employeeDAOinterface);
+//			createEmployee(employeeDAOinterface);
+			readEmployee(employeeDAOinterface);
 //			employeesQuery(employeeDAOinterface);
 //			employeesQueryByLastName(employeeDAOinterface);
 //			updateEmployee(employeeDAOinterface);
-			deleteEmployee(employeeDAOinterface);
+//			deleteEmployee(employeeDAOinterface);
+//			deleteAll(employeeDAOinterface);
 		};
+	}
+
+	private void deleteAll(EmployeeDAOInterface employeeDAOinterface) {
+		System.out.println("Deleting All data.......");
+		int rowsDeleted = employeeDAOinterface.deleteAll();
+		System.out.println("Delete number of rows successfully "+rowsDeleted);
 	}
 
 	public void deleteEmployee(EmployeeDAOInterface employeeDAOinterface) {
@@ -67,37 +75,37 @@ public class CrudappApplication {
 	}
 
 
-//	public void readEmployee(EmployeeDAOInterface employeeDAOinterface) {
-//
-//		System.out.println("Creating employee ...");
-//		Employee newEmployee = new Employee("Casie", "Smith", "Casie123@gmail.com");
-//
-//		System.out.println("Saving employee ...");
-//		employeeDAOinterface.save(newEmployee);
-//
-//		System.out.println("Saved employee ...");
-//		System.out.println("Retrieving employee ..." + newEmployee.getId());
-//		Employee employee = employeeDAOinterface.findById(newEmployee.getId());
-//
-//		System.out.println("Employee found "+employee);
-//	}
-//
+	public void readEmployee(EmployeeDAOInterface employeeDAOinterface) {
+
+		System.out.println("Creating employee ...");
+		Employee newEmployee = new Employee("Casie", "Smith", "Casie123@gmail.com");
+
+		System.out.println("Saving employee ...");
+		employeeDAOinterface.save(newEmployee);
+
+		System.out.println("Saved employee ...");
+		System.out.println("Retrieving employee ..." + newEmployee.getId());
+		Employee employee = employeeDAOinterface.findById(newEmployee.getId());
+
+		System.out.println("Employee found "+employee);
+	}
 
 
 
-//	private void createEmployee(EmployeeDAOInterface employeeDAOInterface) {
-//		System.out.println("Creating employee ...");
-//		Employee newEmployee = new Employee("Casie", "Smith", "Casie123@gmail.com");
-//		Employee newEmployee2 = new Employee("Daisy", "Daily", "daisy@gmail.com");
-//		Employee newEmployee3 = new Employee("Prashant", "Yadav", "prashant@gmail.com");
-//		Employee newEmployee4 = new Employee("Som", "Dutta", "som@gmail.com");
-//
-//		System.out.println("Saving employee ...");
-//		employeeDAOInterface.save(newEmployee);
-//		employeeDAOInterface.save(newEmployee2);
-//		employeeDAOInterface.save(newEmployee3);
-//		employeeDAOInterface.save(newEmployee4);
-//
-//		System.out.println("Saved employee ...");
-//	}
+
+	private void createEmployee(EmployeeDAOInterface employeeDAOInterface) {
+		System.out.println("Creating employee ...");
+		Employee newEmployee = new Employee("Casie", "Smith", "Casie123@gmail.com");
+		Employee newEmployee2 = new Employee("Daisy", "Daily", "daisy@gmail.com");
+		Employee newEmployee3 = new Employee("Prashant", "Yadav", "prashant@gmail.com");
+		Employee newEmployee4 = new Employee("Som", "Dutta", "som@gmail.com");
+
+		System.out.println("Saving employee ...");
+		employeeDAOInterface.save(newEmployee);
+		employeeDAOInterface.save(newEmployee2);
+		employeeDAOInterface.save(newEmployee3);
+		employeeDAOInterface.save(newEmployee4);
+
+		System.out.println("Saved employee ...");
+	}
 }
